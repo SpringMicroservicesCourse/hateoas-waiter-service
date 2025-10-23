@@ -10,4 +10,5 @@ import java.util.List;
 public interface CoffeeRepository extends JpaRepository<Coffee, Long> {
     List<Coffee> findByNameInOrderById(List<String> list);
     Coffee findByName(String name);
+    List<Coffee> findByNameIn(List<String> names);
 }

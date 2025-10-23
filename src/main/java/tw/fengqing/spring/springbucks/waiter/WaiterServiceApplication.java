@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import tw.fengqing.spring.springbucks.waiter.model.Coffee;
-import tw.fengqing.spring.springbucks.waiter.model.CoffeeOrder;
+//import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+//import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurer;
+//import org.springframework.web.servlet.config.annotation.CorsRegistry;
+//import tw.fengqing.spring.springbucks.waiter.model.Coffee;
+//import tw.fengqing.spring.springbucks.waiter.model.CoffeeOrder;
 
 import java.util.TimeZone;
 
@@ -35,16 +35,15 @@ public class WaiterServiceApplication {
 		};
 	}
 	
-	@Bean
-	public RepositoryRestConfigurer repositoryRestConfigurer() {
-		return new RepositoryRestConfigurer() {
-			@Override
-			public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
-				// 設定基礎路徑
-				config.setBasePath("/api");
-				// 暴露 ID 欄位
-				config.exposeIdsFor(Coffee.class, CoffeeOrder.class);
-			}
-		};
-	}
+	// 註解此方法，如需要設定base-path，可以啟用此方法 http://localhost:8080/api/coffee
+	// @Bean
+	// public RepositoryRestConfigurer repositoryRestConfigurer() {
+	// 	return new RepositoryRestConfigurer() {
+	// 		@Override
+	// 		public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
+	// 			config.setBasePath("/api");
+	// 			config.exposeIdsFor(Coffee.class, CoffeeOrder.class);
+	// 		}
+	// 	};
+	// }
 }
