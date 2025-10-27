@@ -1,180 +1,217 @@
-# HATEOAS Waiter Service ⚡
+# hateoas-waiter-service
 
-[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://www.oracle.com/java/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
-[![Spring Data REST](https://img.shields.io/badge/Spring%20Data%20REST-3.2.5-blue.svg)](https://spring.io/projects/spring-data-rest)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+> Hypermedia-driven RESTful API with Spring Data REST, auto-generated endpoints, and HATEOAS support
 
-## 專案介紹
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.4.5-brightgreen.svg)](https://spring.io/projects/spring-boot)
+[![Java](https://img.shields.io/badge/Java-21-orange.svg)](https://openjdk.org/)
+[![Spring Data REST](https://img.shields.io/badge/Spring%20Data%20REST-3.4.5-blue.svg)](https://spring.io/projects/spring-data-rest)
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-這是一個基於 **Spring Data REST** 和 **HATEOAS**（Hypertext Application Language）的咖啡廳訂單管理系統。專案展示了如何使用 Spring Boot 快速構建符合 REST 規範的 Web 服務，並透過超媒體驅動的方式提供 API 導航功能。
+A comprehensive demonstration of **Spring Data REST** with HATEOAS (Hypermedia As The Engine Of Application State), featuring auto-generated RESTful endpoints, hypermedia links, pagination, and Money type handling.
 
-### 🎯 核心功能
-- **咖啡商品管理**：提供咖啡品項的 CRUD 操作
-- **訂單管理**：處理客戶訂單的建立與狀態追蹤
-- **HATEOAS 支援**：自動生成超媒體連結，提供 API 導航
-- **分頁與搜尋**：支援分頁查詢和自定義搜尋功能
+## Features
 
-### 💡 為什麼選擇此專案？
-- **快速開發**：Spring Data REST 自動生成 RESTful API
-- **標準化**：符合 HATEOAS 規範，提供一致的 API 體驗
-- **可擴展性**：易於添加新的資源和功能
-- **開發效率**：減少重複的 Controller 程式碼
+- Auto-generated REST endpoints from JPA repositories
+- HATEOAS hypermedia links in responses
+- Built-in pagination and sorting support
+- Custom search endpoints from query methods
+- Money type handling with Joda Money (TWD currency)
+- H2 in-memory database
+- JSON/XML format support
+- Hibernate 6 + Jakarta EE support
 
-### 🎯 專案特色
+## Tech Stack
 
-- **自動化 API 生成**：基於 JPA Repository 自動產生 REST 端點
-- **超媒體驅動**：每個資源都包含相關連結，便於 API 導航
-- **多格式支援**：支援 JSON 和 XML 格式回應
-- **分頁與排序**：內建分頁、排序和搜尋功能
-- **貨幣處理**：整合 Joda Money 處理價格資訊
+- Spring Boot 3.4.5
+- Spring Data REST
+- Spring Data JPA
+- Java 21
+- Hibernate 6
+- Joda Money 2.0.2
+- H2 Database
+- Lombok
+- Jackson (JSON/XML)
+- Maven 3.8+
 
-## 技術棧
+## Getting Started
 
-### 核心框架
-- **Spring Boot 3.2.5** - 快速開發框架
-- **Spring Data JPA** - 資料持久化層
-- **Spring Data REST** - 自動生成 RESTful API
-- **Hibernate 6.4.4** - ORM 框架
+### Prerequisites
 
-### 開發工具與輔助
-- **Joda Money 2.0.2** - 貨幣處理庫
-- **Jackson 2.19.1** - JSON/XML 序列化
-- **H2 Database** - 內嵌式資料庫
-- **Lombok** - 減少樣板程式碼
-- **Apache Commons Lang3** - 工具類庫
+- JDK 21 or higher
+- Maven 3.8+ (or use included Maven Wrapper)
 
-## 專案結構
+### Quick Start
 
-```
-hateoas-waiter-service/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── tw/fengqing/spring/springbucks/waiter/
-│   │   │       ├── model/
-│   │   │       │   ├── BaseEntity.java          # 基礎實體類別
-│   │   │       │   ├── Coffee.java              # 咖啡實體類別
-│   │   │       │   ├── CoffeeOrder.java         # 訂單實體類別
-│   │   │       │   ├── OrderState.java          # 訂單狀態列舉
-│   │   │       │   └── MoneyConverter.java      # 貨幣轉換器
-│   │   │       ├── repository/
-│   │   │       │   ├── CoffeeRepository.java     # 咖啡資料存取層
-│   │   │       │   └── CoffeeOrderRepository.java # 訂單資料存取層
-│   │   │       ├── support/
-│   │   │       │   ├── MoneySerializer.java     # 貨幣序列化器
-│   │   │       │   └── MoneyDeserializer.java   # 貨幣反序列化器
-│   │   │       └── WaiterServiceApplication.java # 主應用程式類別
-│   │   └── resources/
-│   │       ├── application.properties            # 應用程式設定檔
-│   │       ├── schema.sql                       # 資料庫結構定義
-│   │       └── data.sql                         # 初始資料
-│   └── test/
-│       └── java/
-│           └── tw/fengqing/spring/springbucks/waiter/
-│               └── WaiterServiceApplicationTests.java
-├── pom.xml                                      # Maven 專案配置
-└── README.md                                    # 專案說明文件
-```
-
-## 快速開始
-
-### 前置需求
-- **Java 21** 或更高版本
-- **Maven 3.6** 或更高版本
-- **IDE**：建議使用 IntelliJ IDEA 或 Eclipse
-
-### 安裝與執行
-
-1. **克隆此倉庫：**
 ```bash
-git clone https://github.com/SpringMicroservicesCourse/hateoas-waiter-service.git
+# Build the project
+./mvnw clean compile
+
+# Run the application
+./mvnw spring-boot:run
+
+# Verify the service
+curl http://localhost:8080/ | jq
 ```
 
-2. **進入專案目錄：**
+## API Documentation
+
+### Root Endpoint
+
 ```bash
-cd hateoas-waiter-service
+curl http://localhost:8080/
 ```
 
-3. **編譯專案：**
+**Response:**
+```json
+{
+  "_links": {
+    "coffee": {
+      "href": "http://localhost:8080/coffee{?page,size,sort}",
+      "templated": true
+    },
+    "coffeeOrders": {
+      "href": "http://localhost:8080/coffeeOrders{?page,size,sort}",
+      "templated": true
+    },
+    "profile": {
+      "href": "http://localhost:8080/profile"
+    }
+  }
+}
+```
+
+### Coffee Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/coffee` | Get all coffees (paginated) |
+| GET | `/coffee/{id}` | Get coffee by ID |
+| POST | `/coffee` | Create new coffee |
+| PUT | `/coffee/{id}` | Update coffee |
+| DELETE | `/coffee/{id}` | Delete coffee |
+| GET | `/coffee/search` | List all search endpoints |
+
+### Search Endpoints
+
+| Endpoint | Parameters | Description |
+|----------|------------|-------------|
+| `/coffee/search/findByName` | `name` | Find coffee by exact name |
+| `/coffee/search/findByNameIn` | `names` | Find coffees by name list |
+| `/coffee/search/findByNameInOrderById` | `list` | Find coffees by name list, sorted by ID |
+
+**Example:**
+
 ```bash
-mvn compile
+# Get all coffees
+curl http://localhost:8080/coffee | jq
+
+# Get coffee by ID
+curl http://localhost:8080/coffee/1 | jq
+
+# Search by name
+curl "http://localhost:8080/coffee/search/findByName?name=latte" | jq
+
+# Search by multiple names
+curl "http://localhost:8080/coffee/search/findByNameIn?names=latte,mocha" | jq
+
+# Search with sorting
+curl "http://localhost:8080/coffee/search/findByNameInOrderById?list=mocha,latte" | jq
 ```
 
-4. **執行應用程式：**
+### Pagination & Sorting
+
 ```bash
-mvn spring-boot:run
+# Paginated (3 items per page, page 0)
+curl "http://localhost:8080/coffee?page=0&size=3" | jq
+
+# Sorted by ID descending
+curl "http://localhost:8080/coffee?sort=id,desc" | jq
+
+# Combined: pagination + sorting
+curl "http://localhost:8080/coffee?page=0&size=3&sort=id,desc" | jq
 ```
 
-5. **驗證服務：**
-```bash
-# 測試 API 根路徑
-curl http://localhost:8080/api
-
-# 查看咖啡列表
-curl http://localhost:8080/api/coffee
-
-# 查看訂單列表
-curl http://localhost:8080/api/coffeeOrders
+**Pagination Response:**
+```json
+{
+  "_embedded": {
+    "coffee": [
+      {
+        "_links": {...},
+        "id": 5,
+        "name": "macchiato",
+        "price": 150.00
+      },
+      ...
+    ]
+  },
+  "_links": {
+    "first": {"href": "..."},
+    "self": {"href": "..."},
+    "next": {"href": "..."},
+    "last": {"href": "..."}
+  },
+  "page": {
+    "size": 3,
+    "totalElements": 5,
+    "totalPages": 2,
+    "number": 0
+  }
+}
 ```
 
-## API 端點說明
+## Configuration
 
-### 基礎路徑
-所有 API 端點都以 `/api` 為基礎路徑
+### Application Properties
 
-### 主要端點
-
-| 端點 | 方法 | 說明 | 範例 |
-|------|------|------|------|
-| `/api` | GET | API 根路徑，顯示所有可用資源 | `curl http://localhost:8080/api` |
-| `/api/coffee` | GET | 取得所有咖啡品項 | `curl http://localhost:8080/api/coffee` |
-| `/api/coffee/{id}` | GET | 取得特定咖啡品項 | `curl http://localhost:8080/api/coffee/1` |
-| `/api/coffee/search/findByName?name=latte` | GET | 搜尋特定名稱的咖啡 | `curl "http://localhost:8080/api/coffee/search/findByName?name=latte"` |
-| `/api/coffeeOrders` | GET | 取得所有訂單 | `curl http://localhost:8080/api/coffeeOrders` |
-| `/api/coffeeOrders/{id}` | GET | 取得特定訂單 | `curl http://localhost:8080/api/coffeeOrders/1` |
-
-### 分頁與排序
-```bash
-# 分頁查詢（每頁 3 筆，第 0 頁）
-curl "http://localhost:8080/api/coffee?page=0&size=3"
-
-# 排序查詢（依 ID 降序）
-curl "http://localhost:8080/api/coffee?sort=id,desc"
-```
-
-## 進階說明
-
-### 環境變數
 ```properties
-# 資料庫設定（使用 H2 內嵌資料庫）
-spring.datasource.url=jdbc:h2:mem:testdb
-spring.datasource.driverClassName=org.h2.Driver
-
-# JPA 設定
+# JPA/Hibernate configuration
 spring.jpa.hibernate.ddl-auto=none
 spring.jpa.properties.hibernate.show_sql=true
 spring.jpa.properties.hibernate.format_sql=true
 
-# REST API 設定
-spring.data.rest.base-path=/api
+# Error handling (development only)
+server.error.include-message=always
+server.error.include-binding-errors=always
 ```
 
-### 重要程式碼說明
+## Key Components
 
-#### 1. Repository 配置
+### Repository Configuration
+
 ```java
 @RepositoryRestResource(path = "coffee")
 public interface CoffeeRepository extends JpaRepository<Coffee, Long> {
-    // 根據名稱列表查詢咖啡，並按 ID 排序
+    /**
+     * Find coffees by name list, sorted by ID
+     * Auto-generates: GET /coffee/search/findByNameInOrderById?list=latte,mocha
+     */
     List<Coffee> findByNameInOrderById(List<String> list);
     
-    // 根據單一名稱查詢咖啡
+    /**
+     * Find coffee by exact name
+     * Auto-generates: GET /coffee/search/findByName?name=latte
+     */
     Coffee findByName(String name);
+    
+    /**
+     * Find coffees by name list (unsorted)
+     * Auto-generates: GET /coffee/search/findByNameIn?names=latte,mocha
+     */
+    List<Coffee> findByNameIn(List<String> names);
 }
 ```
 
-#### 2. 實體類別設計
+**Auto-Generated REST Endpoints:**
+- GET `/coffee` - List all coffees
+- GET `/coffee/{id}` - Get coffee by ID
+- POST `/coffee` - Create coffee
+- PUT `/coffee/{id}` - Update coffee
+- DELETE `/coffee/{id}` - Delete coffee
+- GET `/coffee/search` - List custom search endpoints
+
+### Entity Design
+
 ```java
 @Entity
 @Table(name = "T_COFFEE")
@@ -184,120 +221,380 @@ public interface CoffeeRepository extends JpaRepository<Coffee, Long> {
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Coffee extends BaseEntity implements Serializable {
+public class Coffee extends BaseEntity {
     private String name;
     
-    // 使用自定義轉換器處理貨幣類型
     @Convert(converter = MoneyConverter.class)
     private Money price;
 }
 ```
 
-#### 3. 應用程式配置
+### Money Type Handling (TWD Currency)
+
+**MoneyConverter (JPA Layer)**:
+```java
+@Converter(autoApply = true)
+public class MoneyConverter implements AttributeConverter<Money, Long> {
+    
+    @Override
+    public Long convertToDatabaseColumn(Money attribute) {
+        // TWD 125.00 → 12500 cents (stored in database)
+        return attribute == null ? null : attribute.getAmountMinorLong();
+    }
+
+    @Override
+    public Money convertToEntityAttribute(Long dbData) {
+        // 12500 cents → Money.of(TWD, 125.00)
+        return dbData == null ? null : Money.ofMinor(CurrencyUnit.of("TWD"), dbData);
+    }
+}
+```
+
+**MoneySerializer (JSON Layer)**:
+```java
+@JsonComponent
+public class MoneySerializer extends StdSerializer<Money> {
+    @Override
+    public void serialize(Money money, JsonGenerator jsonGenerator, 
+                         SerializerProvider serializerProvider) throws IOException {
+        // Money.of(TWD, 125.00) → 125.00 (JSON output)
+        jsonGenerator.writeNumber(money.getAmount());
+    }
+}
+```
+
+**MoneyDeserializer (JSON Layer)**:
+```java
+@JsonComponent
+public class MoneyDeserializer extends StdDeserializer<Money> {
+    @Override
+    public Money deserialize(JsonParser p, DeserializationContext ctxt) {
+        // JSON 125.00 → Money.of(TWD, 125.00)
+        return Money.of(CurrencyUnit.of("TWD"), p.getDecimalValue());
+    }
+}
+```
+
+**Price Conversion Flow:**
+```
+Database (cents) ←→ JPA (MoneyConverter) ←→ Java Object (Money) ←→ JSON (Serializer/Deserializer) ←→ API Response
+    12500                                  Money.of(TWD,125.00)                                125.00
+```
+
+### Application Configuration
+
 ```java
 @SpringBootApplication
 @EnableCaching
 public class WaiterServiceApplication {
     
-    // 配置 Hibernate 模組，處理延遲載入
     @Bean
     public Hibernate6Module hibernate6Module() {
         return new Hibernate6Module();
     }
-    
-    // 配置 REST API 基礎路徑和 ID 暴露
+
     @Bean
-    public RepositoryRestConfigurer repositoryRestConfigurer() {
-        return new RepositoryRestConfigurer() {
-            @Override
-            public void configureRepositoryRestConfiguration(
-                RepositoryRestConfiguration config, CorsRegistry cors) {
-                // 設定 API 基礎路徑
-                config.setBasePath("/api");
-                // 暴露實體 ID 欄位
-                config.exposeIdsFor(Coffee.class, CoffeeOrder.class);
-            }
+    public Jackson2ObjectMapperBuilderCustomizer jacksonBuilderCustomizer() {
+        return builder -> {
+            builder.indentOutput(true);
+            builder.timeZone(TimeZone.getTimeZone("Asia/Taipei"));
         };
     }
 }
 ```
 
-## 參考資源
+## Database Schema
 
-- [Spring Data REST 官方文件](https://docs.spring.io/spring-data/rest/docs/current/reference/html/)
-- [HATEOAS 規範說明](https://restfulapi.net/hateoas/)
-- [Spring Boot 官方指南](https://spring.io/guides)
-- [Joda Money 文件](https://www.joda.org/joda-money/)
+**schema.sql:**
+```sql
+-- Coffee table
+create table t_coffee (
+    id bigint auto_increment,
+    create_time timestamp,
+    update_time timestamp,
+    name varchar(255),
+    price bigint,              -- Stored in cents (10000 = 100.00 TWD)
+    primary key (id)
+);
 
-## 注意事項與最佳實踐
+-- Order table
+create table t_order (
+    id bigint auto_increment,
+    create_time timestamp,
+    update_time timestamp,
+    customer varchar(255),
+    state integer not null,
+    primary key (id)
+);
 
-### ⚠️ 重要提醒
+-- Order-Coffee relationship
+create table t_order_coffee (
+    coffee_order_id bigint not null,
+    items_id bigint not null
+);
+```
 
-| 項目 | 說明 | 建議做法 |
-|------|------|----------|
-| 資料庫連線 | 生產環境資料庫配置 | 使用外部資料庫（如 PostgreSQL） |
-| 安全性 | API 認證與授權 | 整合 Spring Security |
-| 效能 | 大量資料處理 | 實作快取機制 |
-| 監控 | 應用程式監控 | 整合 Spring Boot Actuator |
+**data.sql (Initial Data):**
+```sql
+-- Prices stored in minor units (cents)
+insert into t_coffee (name, price, create_time, update_time) 
+    values ('espresso', 10000, now(), now());     -- TWD 100.00
+insert into t_coffee (name, price, create_time, update_time) 
+    values ('latte', 12500, now(), now());        -- TWD 125.00
+insert into t_coffee (name, price, create_time, update_time) 
+    values ('capuccino', 12500, now(), now());    -- TWD 125.00
+insert into t_coffee (name, price, create_time, update_time) 
+    values ('mocha', 15000, now(), now());        -- TWD 150.00
+insert into t_coffee (name, price, create_time, update_time) 
+    values ('macchiato', 15000, now(), now());    -- TWD 150.00
+```
 
-### 🔒 最佳實踐指南
+## HATEOAS Response Format
 
-- **API 版本控制**：在 URL 路徑中加入版本號（如 `/api/v1/coffee`）
-- **錯誤處理**：實作統一的錯誤回應格式
-- **API 文件**：整合 Swagger/OpenAPI 自動生成文件
-- **測試覆蓋率**：撰寫完整的單元測試和整合測試
-- **程式碼品質**：使用 Checkstyle 和 SpotBugs 確保程式碼品質
+### Single Resource
 
-### 📝 程式碼註解規範
-
-```java
-/**
- * 咖啡實體類別
- * 
- * 此類別代表咖啡廳中的咖啡品項，包含：
- * - 咖啡名稱
- * - 價格資訊（使用 Joda Money 處理）
- * - 建立和更新時間戳記
- * 
- * @author 風清雲談
- * @since 1.0.0
- */
-@Entity
-@Table(name = "T_COFFEE")
-public class Coffee extends BaseEntity implements Serializable {
-    
-    /**
-     * 咖啡名稱
-     * 例如：espresso、latte、cappuccino
-     */
-    private String name;
-    
-    /**
-     * 咖啡價格
-     * 使用 Joda Money 處理貨幣，支援多幣別
-     */
-    @Convert(converter = MoneyConverter.class)
-    private Money price;
+```json
+{
+  "_links": {
+    "self": {
+      "href": "http://localhost:8080/coffee/1"
+    },
+    "coffee": {
+      "href": "http://localhost:8080/coffee/1"
+    }
+  },
+  "id": 1,
+  "name": "espresso",
+  "price": 100.00,
+  "createTime": "2025-10-27T10:00:00.000+08:00",
+  "updateTime": "2025-10-27T10:00:00.000+08:00"
 }
 ```
 
-## 授權說明
+### Collection Resource
 
-本專案採用 MIT 授權條款，詳見 LICENSE 檔案。
+```json
+{
+  "_embedded": {
+    "coffee": [
+      {
+        "_links": {...},
+        "id": 1,
+        "name": "espresso",
+        "price": 100.00
+      },
+      ...
+    ]
+  },
+  "_links": {
+    "self": {"href": "http://localhost:8080/coffee"},
+    "profile": {"href": "http://localhost:8080/profile/coffee"}
+  },
+  "page": {
+    "size": 20,
+    "totalElements": 5,
+    "totalPages": 1,
+    "number": 0
+  }
+}
+```
 
-## 關於我們
+## Testing
 
-我們主要專注在敏捷專案管理、物聯網（IoT）應用開發和領域驅動設計（DDD）。喜歡把先進技術和實務經驗結合，打造好用又靈活的軟體解決方案。
+### Manual Testing
 
-## 聯繫我們
+```bash
+# 1. List all coffees
+curl http://localhost:8080/coffee | jq '._embedded.coffee[] | {name, price}'
 
-- **FB 粉絲頁**：[風清雲談 | Facebook](https://www.facebook.com/profile.php?id=61576838896062)
-- **LinkedIn**：[linkedin.com/in/chu-kuo-lung](https://www.linkedin.com/in/chu-kuo-lung)
-- **YouTube 頻道**：[雲談風清 - YouTube](https://www.youtube.com/channel/UCXDqLTdCMiCJ1j8xGRfwEig)
-- **風清雲談 部落格**：[風清雲談](https://blog.fengqing.tw/)
-- **電子郵件**：[fengqing.tw@gmail.com](mailto:fengqing.tw@gmail.com)
+# Expected output:
+# {
+#   "name": "espresso",
+#   "price": 100
+# }
+# {
+#   "name": "latte",
+#   "price": 125
+# }
+# ...
+
+# 2. Create new coffee
+curl -X POST http://localhost:8080/coffee \
+  -H "Content-Type: application/json" \
+  -d '{"name": "americano", "price": 110.00}' | jq
+
+# 3. Update coffee
+curl -X PUT http://localhost:8080/coffee/1 \
+  -H "Content-Type: application/json" \
+  -d '{"name": "espresso", "price": 105.00}' | jq
+
+# 4. Delete coffee
+curl -X DELETE http://localhost:8080/coffee/1
+
+# 5. Search by name
+curl "http://localhost:8080/coffee/search/findByName?name=latte" | jq
+```
+
+### Unit Tests
+
+```bash
+# Run tests
+./mvnw test
+
+# Run with coverage
+./mvnw clean test jacoco:report
+```
+
+## Troubleshooting
+
+### Common Issues
+
+| Issue | Check Command | Solution |
+|-------|--------------|----------|
+| **No search endpoints** | `curl http://localhost:8080/coffee/search` | Verify repository query methods exist |
+| **Wrong price format** | Check logs for Money conversion | Verify MoneyConverter uses TWD minor units (cents) |
+| **H2 database error** | Check startup logs | Ensure schema.sql and data.sql loaded correctly |
+| **Missing _links** | Verify Spring Data REST enabled | Check `spring-boot-starter-data-rest` dependency |
+
+**Quick Checks**:
+```bash
+# Verify all endpoints
+curl http://localhost:8080/ | jq '._links'
+
+# Check coffee data with prices
+curl http://localhost:8080/coffee | jq '._embedded.coffee[] | {name, price}'
+
+# Verify search endpoints
+curl http://localhost:8080/coffee/search | jq '._links'
+```
+
+## Spring Data REST vs Traditional REST
+
+| Aspect | Traditional REST | Spring Data REST |
+|--------|------------------|------------------|
+| **Controller** | Manual @RestController | Auto-generated |
+| **Endpoints** | Manual @RequestMapping | Auto-generated from repository |
+| **Pagination** | Manual implementation | Built-in |
+| **Hypermedia Links** | Manual LinkBuilder | Auto-generated |
+| **Search** | Manual @GetMapping | Auto-generated from query methods |
+| **HATEOAS** | Manual implementation | Built-in HAL format |
+
+## Best Practices Demonstrated
+
+1. **Repository-based REST**: Auto-generate endpoints from repositories
+2. **HATEOAS Compliance**: Hypermedia-driven API design
+3. **Money Type Handling**: Proper currency handling with Joda Money
+4. **Entity Inheritance**: BaseEntity pattern for common fields
+5. **Jakarta EE**: Modern Spring Boot 3.x standard
+6. **Custom Query Methods**: Spring Data JPA naming conventions
+7. **JSON Customization**: Custom serializers/deserializers
+
+## Advanced Topics
+
+### Custom Repository Configuration
+
+```java
+@RepositoryRestResource(
+    path = "coffee",                    // Resource path
+    collectionResourceRel = "coffees",  // Collection relation name
+    itemResourceRel = "coffee"          // Item relation name
+)
+public interface CoffeeRepository extends JpaRepository<Coffee, Long> {
+    
+    @RestResource(path = "by-name", rel = "findByName")
+    Coffee findByName(@Param("name") String name);
+    
+    @RestResource(exported = false)  // Hide from REST API
+    void deleteByName(String name);
+}
+```
+
+### Global REST Configuration
+
+```java
+@Configuration
+public class RestConfig implements RepositoryRestConfigurer {
+    
+    @Override
+    public void configureRepositoryRestConfiguration(
+            RepositoryRestConfiguration config, CorsRegistry cors) {
+        
+        // Set base path
+        config.setBasePath("/api");
+        
+        // Expose entity IDs
+        config.exposeIdsFor(Coffee.class, CoffeeOrder.class);
+        
+        // Pagination settings
+        config.setDefaultPageSize(20);
+        config.setMaxPageSize(100);
+        
+        // Return body on create/update
+        config.setReturnBodyOnCreate(true);
+        config.setReturnBodyOnUpdate(true);
+    }
+}
+```
+
+## Project Structure
+
+```
+hateoas-waiter-service/
+├── src/
+│   ├── main/
+│   │   ├── java/tw/fengqing/spring/springbucks/waiter/
+│   │   │   ├── model/
+│   │   │   │   ├── BaseEntity.java          # Base entity with ID & timestamps
+│   │   │   │   ├── Coffee.java              # Coffee entity
+│   │   │   │   ├── CoffeeOrder.java         # Order entity
+│   │   │   │   ├── OrderState.java          # Order state enum
+│   │   │   │   └── MoneyConverter.java      # JPA Money converter
+│   │   │   ├── repository/
+│   │   │   │   ├── CoffeeRepository.java    # Coffee repository (REST-exposed)
+│   │   │   │   └── CoffeeOrderRepository.java # Order repository
+│   │   │   ├── support/
+│   │   │   │   ├── MoneySerializer.java     # JSON Money serializer
+│   │   │   │   └── MoneyDeserializer.java   # JSON Money deserializer
+│   │   │   └── WaiterServiceApplication.java # Main application
+│   │   └── resources/
+│   │       ├── application.properties        # App configuration
+│   │       ├── schema.sql                   # Database schema
+│   │       └── data.sql                     # Initial data
+│   └── test/
+│       └── java/tw/fengqing/spring/springbucks/waiter/
+│           └── WaiterServiceApplicationTests.java
+└── pom.xml                                  # Maven configuration
+```
+
+## References
+
+- [Spring Data REST Documentation](https://docs.spring.io/spring-data/rest/docs/current/reference/html/)
+- [HATEOAS Specification](https://restfulapi.net/hateoas/)
+- [HAL Format](https://tools.ietf.org/html/draft-kelly-json-hal)
+- [Spring Data JPA Documentation](https://docs.spring.io/spring-data/jpa/docs/current/reference/html/)
+- [Joda Money Documentation](https://www.joda.org/joda-money/)
+
+## License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## About Us
+
+我們主要專注在敏捷專案管理、物聯網（IoT）應用開發和領域驅動設計（DDD）。喜歡把先進技術和實務經驗結合，打造好用又靈活的軟體解決方案。近來也積極結合 AI 技術，推動自動化工作流，讓開發與運維更有效率、更智慧。持續學習與分享，希望能一起推動軟體開發的創新和進步。
+
+## Contact
+
+**風清雲談** - 專注於敏捷專案管理、物聯網（IoT）應用開發和領域驅動設計（DDD）。
+
+- 🌐 官方網站：[風清雲談部落格](https://blog.fengqing.tw/)
+- 📘 Facebook：[風清雲談粉絲頁](https://www.facebook.com/profile.php?id=61576838896062)
+- 💼 LinkedIn：[Chu Kuo-Lung](https://www.linkedin.com/in/chu-kuo-lung)
+- 📺 YouTube：[雲談風清頻道](https://www.youtube.com/channel/UCXDqLTdCMiCJ1j8xGRfwEig)
+- 📧 Email：[fengqing.tw@gmail.com](mailto:fengqing.tw@gmail.com)
 
 ---
 
-**📅 最後更新：2025-07-28**  
-**👨‍💻 維護者：風清雲談** 
+**📅 Last Updated: 2025-10-27**  
+**👨‍💻 Maintainer: FengQing Team**
+
+**⭐ If this project helps you, please give it a star!**
